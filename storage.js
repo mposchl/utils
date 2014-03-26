@@ -33,7 +33,7 @@ var Storage = function(options) {
     /**
      * @var
      */
-    this.storage = defaults.localStorage;
+    this.storage = defaults.storage;
 
     /**
      * @var
