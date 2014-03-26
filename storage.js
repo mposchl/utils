@@ -144,7 +144,7 @@ Storage.prototype.wrapData = function(data) {
  */
 Storage.prototype.valid = function(item) {
    var valid = item && !this.empty(item) && !this.expired(item);
-   this.log((valid ? 'valid ' : 'invalid') + item);
+   this.log((valid ? 'valid ' : 'invalid ') + item);
    return valid;
 };
 
