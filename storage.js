@@ -7,12 +7,12 @@ var Storage = function(data) {
    /**
     * @var
     */
-    this.defaultExpiration = data && data.defaultExpiration || 600; //[s]
+    this.defaultExpiration = 600; //[s]
 
     /**
      * @var
      */
-    this.forceRefresh = data && data.forceRefresh || false;
+    this.forceRefresh = false;
 
     /**
      * @var
@@ -27,7 +27,12 @@ var Storage = function(data) {
     /**
      * @var
      */
-    this.debug = data && data.debug || false;
+    this.debug = false;
+
+    /**
+     * merge optional config
+     */
+    $.extend(this, data);
 }
 
 /**
