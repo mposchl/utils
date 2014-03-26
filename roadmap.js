@@ -28,7 +28,7 @@ var Roadmap = function(data) {
     /**
      * cache storage instance
      */
-    this.storage = data.storage;
+    this.storage = new Storage({defaultExpiration: 60, forceRefresh: true});
 };
 
 /**
