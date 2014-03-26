@@ -88,7 +88,6 @@ Storage.prototype.get = function(key) {
    var getKey = this.getKey(key),
        item = this.storage.getItem(getKey);
 
-   this.log((this.valid(item) ? 'found ' : 'invalid') + getKey);
    return this.valid(item) ? JSON.parse(item) : null;
 };
 
@@ -144,8 +143,9 @@ Storage.prototype.wrapData = function(data) {
  * @return {Boolean}
  */
 Storage.prototype.valid = function(item) {
-   this.log('valid ' + item);
-   return item && !this.empty(item) && !this.expired(item);
+   var valid = item && !this.empty(item) && !this.expired(item);
+   this.log((valid ? 'valid ' : 'invalid') + item);
+   return valid;
 };
 
 /**
