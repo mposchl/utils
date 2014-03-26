@@ -157,7 +157,7 @@ Storage.prototype.valid = function(item) {
 Storage.prototype.expired = function(item) {
    var now = +new Date();
 
-   return item.expire >= now || this.forceRefresh;
+   return item.expire < now || this.forceRefresh;
 };
 
 /**
