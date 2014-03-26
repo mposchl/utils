@@ -72,7 +72,7 @@ Storage.prototype.get = function(key) {
    var getKey = this.getKey(key),
        item = this.storage.getItem(getKey);
 
-   this.log(item ? 'found ' + getKey : '');
+   this.log((this.valid(item) ? 'found ' : 'invalid') + getKey);
    return this.valid(item) ? JSON.parse(item) : null;
 };
 
