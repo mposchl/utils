@@ -28,7 +28,7 @@ var Roadmap = function(data) {
     /**
      * cache storage instance
      */
-    this.storage = new Storage({defaultExpiration: 60, forceRefresh: true});
+    this.storage = data.storage;
 };
 
 /**
@@ -49,10 +49,12 @@ Roadmap.prototype.run = function() {
  * @return {jqXHR}
  */
 Roadmap.prototype.request = function(id) {
+    var that = this;
+
     return $.ajax(this.url+'/issues/'+id+'.json', {
         dataType: 'json',
         beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', Utils.makeBaseAuth(this.login, this.pswd));
+            xhr.setRequestHeader('Authorization', Utils.makeBaseAuth(that.login, that.pswd));
         }
     });
 };

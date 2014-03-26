@@ -7,12 +7,12 @@ var Storage = function(data) {
    /**
     * @var
     */
-    this.defaultExpiration = data.defaultExpiration || 600; //[s]
+    this.defaultExpiration = data && data.defaultExpiration || 600; //[s]
 
     /**
      * @var
      */
-    this.forceRefresh = data.forceRefresh || false;
+    this.forceRefresh = data && data.forceRefresh || false;
 
     /**
      * @var
