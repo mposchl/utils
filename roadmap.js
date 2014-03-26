@@ -97,8 +97,8 @@ Roadmap.prototype.fillRoadmap = function() {
 Roadmap.prototype.insertCell = function(data, $row) {
     var assigned = data.assigned_to ? data.assigned_to.name : '',
         status = data.status ? data.status.name : '',
-        environment = Utils.getEnvironment(data.custom_fields);
-    
+        environment = Utils.getEnvironment(data.custom_fields ? data.custom_fields : []);
+
     $row.find('td:last').html($row.find('td:last').html() + ' (<i>' + status + ' [' + environment + ']</i> - <b>' + assigned + '</b>)');
 };
 
