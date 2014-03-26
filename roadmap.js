@@ -28,6 +28,11 @@ var Roadmap = function(data) {
      * cache storage instance
      */
     this.storage = null;
+
+    /**
+     * default refresh on storage
+     */
+    this.storageData = data.storageData || {};
 };
 
 /**
@@ -37,9 +42,9 @@ var Roadmap = function(data) {
  */
 Roadmap.prototype.run = function() {
     this.$related = $('.related-issues');
-    
-    this.storage = new Storage;
-    
+
+    this.storage = new Storage(this.storageData);
+
     this.fillRoadmap();
 };
 

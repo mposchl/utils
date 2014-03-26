@@ -3,11 +3,16 @@
  *
  * @type {Object}
  */
-var Storage = function() {
+var Storage = function(data) {
    /**
     * @var
     */
-    this.defaultExpiration = 600; //[s]
+    this.defaultExpiration = data.defaultExpiration || 600; //[s]
+
+    /**
+     * @var
+     */
+    this.forceRefresh = data.forceRefresh || false;
 
     /**
      * @var
@@ -68,7 +73,7 @@ Storage.prototype.get = function(key) {
        item = this.storage.getItem(getKey);
 
    this.log(item ? 'found ' + getKey : '');
-   return item ? JSON.parse(item) : null;
+   return this.valid(item) ? JSON.parse(item) : null;
 };
 
 /**
@@ -136,7 +141,7 @@ Storage.prototype.valid = function(item) {
 Storage.prototype.expired = function(item) {
    var now = +new Date();
 
-   return item.expire >= now;
+   return item.expire >= now || this.forceRefresh;
 };
 
 /**
