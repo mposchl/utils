@@ -27,7 +27,7 @@ var Storage = function(data) {
     /**
      * @var
      */
-    this.debug = true;
+    this.debug = data && data.debug || false;
 }
 
 /**
