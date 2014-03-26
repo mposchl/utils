@@ -4,6 +4,7 @@
  * @type {Object}
  */
 var Roadmap = function(data) {
+    console.log(data);
     /**
      * url with redmine
      */
