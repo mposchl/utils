@@ -3,36 +3,47 @@
  *
  * @type {Object}
  */
-var Storage = function(data) {
-   /**
-    * @var
-    */
-    this.defaultExpiration = 600; //[s]
-
+var Storage = function(options) {
     /**
-     * @var
+     * default options
      */
-    this.forceRefresh = false;
-
-    /**
-     * @var
-     */
-    this.storage = localStorage;
-
-    /**
-     * @var
-     */
-    this.prefix = '';
-
-    /**
-     * @var
-     */
-    this.debug = false;
+    var defaults = {
+        expiration: 600,
+        forceRefresh: false,
+        storage: localStorage,
+        prefix: '',
+        debug: false
+    };
 
     /**
      * merge optional config
      */
-    $.extend(this, data);
+    $.extend(defaults, options);
+
+    /**
+     * @var
+     */
+    this.expiration = defaults.expiration; //[s]
+
+    /**
+     * @var
+     */
+    this.forceRefresh = defaults.forceRefresh;
+
+    /**
+     * @var
+     */
+    this.storage = defaults.localStorage;
+
+    /**
+     * @var
+     */
+    this.prefix = defaults.prefix;
+
+    /**
+     * @var
+     */
+    this.debug = defaults.debug;
 }
 
 /**
@@ -167,7 +178,7 @@ Storage.prototype.empty = function(item) {
 Storage.prototype.getExpiration = function() {
    var now = +new Date();
 
-   return now + this.defaultExpiration;
+   return now + this.expiration;
 };
 
 /**
