@@ -143,7 +143,7 @@ Storage.prototype.wrapData = function(data) {
  * @return {Boolean}
  */
 Storage.prototype.valid = function(item) {
-   var valid = item && !this.empty(item) && !this.expired(item);
+   var valid = !this.empty(item) && !this.expired(item);
    this.log((valid ? 'valid ' : 'invalid ') + item);
    return valid;
 };
@@ -169,6 +169,7 @@ Storage.prototype.expired = function(item) {
  * @return {Boolean}
  */
 Storage.prototype.empty = function(item) {
+    this.log('empty? '+item);
     return item == undefined;
 };
 
