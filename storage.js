@@ -8,7 +8,7 @@ var Storage = function(options) {
      * default options
      */
     var defaults = {
-        expiration: 600,
+        expiration: 600000, //[ms]
         forceRefresh: false,
         storage: localStorage,
         prefix: '',
@@ -23,7 +23,7 @@ var Storage = function(options) {
     /**
      * @var
      */
-    this.expiration = defaults.expiration; //[s]
+    this.expiration = defaults.expiration;
 
     /**
      * @var
@@ -156,6 +156,8 @@ Storage.prototype.valid = function(item) {
  */
 Storage.prototype.expired = function(item) {
    var now = +new Date();
+
+    this.log('item.expire: ' + item.expire + ' now: ' + now)
 
    return item.expire < now || this.forceRefresh;
 };
