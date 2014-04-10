@@ -169,7 +169,7 @@ Storage.prototype.expired = function(item) {
  * @return {Boolean}
  */
 Storage.prototype.empty = function(item) {
-   return item != undefined;
+    return item == undefined;
 };
 
 /**
