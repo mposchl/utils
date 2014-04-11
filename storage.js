@@ -86,9 +86,15 @@ Storage.prototype.add = function(key, data) {
  */
 Storage.prototype.get = function(key) {
    var getKey = this.getKey(key),
-       item = this.storage.getItem(getKey);
+       itemRaw = this.storage.getItem(getKey);
 
-   return this.valid(item) ? JSON.parse(item) : null;
+   try {
+       var item = JSON.parse(itemRaw);
+   } catch (e) {
+       return null;
+   }
+
+   return this.valid(item) ? item : null;
 };
 
 /**
@@ -144,7 +150,7 @@ Storage.prototype.wrapData = function(data) {
  */
 Storage.prototype.valid = function(item) {
    var valid = !this.empty(item) && !this.expired(item);
-   this.log((valid ? 'valid ' : 'invalid ') + item);
+   this.log((valid ? 'valid' : 'invalid'), item);
    return valid;
 };
 
@@ -157,8 +163,6 @@ Storage.prototype.valid = function(item) {
 Storage.prototype.expired = function(item) {
    var now = +new Date();
 
-    this.log('item.expire: ' + item.expire + ' now: ' + now)
-
    return item.expire < now || this.forceRefresh;
 };
 
@@ -169,7 +173,7 @@ Storage.prototype.expired = function(item) {
  * @return {Boolean}
  */
 Storage.prototype.empty = function(item) {
-    this.log('empty? '+item);
+    this.log('empty?', item);
     return item == undefined;
 };
 
@@ -187,12 +191,12 @@ Storage.prototype.getExpiration = function() {
 /**
  * log some data to console if debug is on
  *
- * @param {Object} msg
+ * @param {String} msg
+ * @param {Object} o
  * @return void
  */
-Storage.prototype.log = function(msg) {
+Storage.prototype.log = function(msg, o) {
    if (this.debug && msg) {
-       console.log(msg);
+       console.log(msg + (o ? ' ' + JSON.stringify(o) : ''));
    }
 };
-
