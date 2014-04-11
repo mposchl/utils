@@ -127,7 +127,7 @@ Storage.prototype.remove = function(key) {
  * @return {String}
  */
 Storage.prototype.getKey = function(key) {
-   return key;
+   return this.prefix + '_' + key;
 };
 
 /**
