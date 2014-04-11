@@ -11,7 +11,7 @@ var Storage = function(options) {
         expiration: 600000, //[ms]
         forceRefresh: false,
         storage: localStorage,
-        prefix: '',
+        prefix: 'storage_123',
         debug: false
     };
 
